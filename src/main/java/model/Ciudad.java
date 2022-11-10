@@ -1,5 +1,5 @@
 package model;
 
 public class Ciudad {
-	private int id;
+	private long id;
 }
