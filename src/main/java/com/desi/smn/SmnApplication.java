@@ -9,5 +9,6 @@ public class SmnApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SmnApplication.class, args);
 	}
+	//Comentario nuevo
 
 }
