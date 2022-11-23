@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,9 +19,14 @@ public class Ciudad {
 	
 	private String nombre;
 	
+	@ManyToOne
+	private Provincia provincia;
+	
 	@OneToMany(mappedBy = "ciudad")
 	private List<Pronostico> pronostico;
 	
+	@OneToMany(mappedBy = "ciudad")
+	private List<Evento> evento;
 
 	public Long getId() {
 		return id;
@@ -44,6 +50,22 @@ public class Ciudad {
 
 	public void setPronostico(List<Pronostico> pronostico) {
 		this.pronostico = pronostico;
+	}
+
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
+	}
+
+	public List<Evento> getEvento() {
+		return evento;
+	}
+
+	public void setEvento(List<Evento> evento) {
+		this.evento = evento;
 	}
 	
 	

@@ -6,25 +6,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.desi.smn.dto.EventoDTO;
 import com.desi.smn.model.Ciudad;
 import com.desi.smn.model.Evento;
 import com.desi.smn.service.ICiudadService;
-import com.desi.smn.service.EventoService;
+import com.desi.smn.service.IEventoService;
 
 
 
 @Controller
-@RequestMapping("/eventoEditar")
+@RequestMapping("/evento")
 public class EventoEditarController {
 	@Autowired
-    private EventoService servicioEvento;
+    private IEventoService servicioEvento;
 	
 	@Autowired
     private ICiudadService servicioCiudad;
@@ -40,35 +38,41 @@ public class EventoEditarController {
 		return LocalDate.now();
 	}
     
-    @RequestMapping(path="")
-    public String preparaForm(Model modelo){
-    	modelo.addAttribute("formBean",new EventoForm());
-		return "eventoEditar";
+    @RequestMapping(method = RequestMethod.GET)
+    public String paginaEvento(@ModelAttribute("eventoDTO") EventoDTO eventoDTO){
+    	
+		return "evento";
     }
  
     
     @RequestMapping( method=RequestMethod.POST)
-    public String submit(@ModelAttribute("formBean") /*@Valid*/  EventoForm formBean,BindingResult result, ModelMap modelo,@RequestParam String action) {
+    public String guardar(@ModelAttribute("eventoDTO") EventoDTO eventoDTO) {
+    	
+    	Evento evento = eventoDTO.toModel();
+    	
+    	evento.setCiudad(servicioCiudad.getById(eventoDTO.getIdCiudad()));
+    	
+    	servicioEvento.save(evento);
     	
     	
-    	if(action.equals("Aceptar"))
-    	{
+//    	if(action.equals("Aceptar"))
+ //   	{
     		
-    		if(result.hasErrors())
-    		{
+ //   		if(result.hasErrors())
+ //   		{
     			
                 
-    			modelo.addAttribute("formBean",formBean);
-    			 return "eventoEditar";
-    		}
-    		else
-    		{
+//    			modelo.addAttribute("formBean",formBean);
+//    			 return "eventoEditar";
+//    		}
+//    		else
+//    		{
     		//	try {
-    			Evento e =formBean.toPojo();
-    			e.setCiudad(servicioCiudad.getById(formBean.getIdCiudad()));
-    			servicioEvento.save(e);
+//    			Evento e =formBean.toPojo();
+//    			e.setCiudad(servicioCiudad.getById(formBean.getIdCiudad()));
+//    			servicioEvento.save(e);
     			
-    			return "redirect:/";
+//    			return "redirect:/";
  //   			} catch (Excepcion e) {
 //					if(e.getAtributo()==null) //si la excepcion estuviera referida a un atributo del objeto, entonces mostrarlo al lado del compornente (ej. dni)
 //					{
@@ -84,20 +88,20 @@ public class EventoEditarController {
 //		            modelo.addAttribute("formBean",formBean);
 //	    			return "ciudadEditar";  //Como existe un error me quedo en la misma pantalla
 //				}
-    		}
+ //   		}
 
     	
         	
-    	}
+  //  	}
     
     	
-    	if(action.equals("Cancelar"))
-    	{
-    		modelo.clear();
-    		return "redirect:/";
-    	}
-    		
-    	return "redirect:/";
+//    	if(action.equals("Cancelar"))
+ //   	{
+ //   		modelo.clear();
+ //   		return "redirect:/";
+ //   	}
+  //  		
+    	return "redirect:/evento";
     	
     	
     }

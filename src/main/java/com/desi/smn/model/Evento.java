@@ -1,8 +1,7 @@
 package com.desi.smn.model;
 
 
-
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,8 +55,8 @@ public class Evento {
 		return dia;
 	}
 
-	public void setDia(Date dia) {
-		this.dia = dia;
+	public void setDia(java.util.Date date) {
+		this.dia = (Date) date;
 	}
 	
 	
