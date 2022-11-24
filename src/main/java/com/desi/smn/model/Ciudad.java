@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Ciudad {
@@ -25,7 +26,9 @@ public class Ciudad {
 	@OneToMany(mappedBy = "ciudad")
 	private List<Pronostico> pronostico;
 	
-
+	@OneToOne
+	private Clima clima; //ESTE ES EL CAMBIO QUE AGREGUE, BORRAR COMENTARIO DSPS
+	
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +59,14 @@ public class Ciudad {
 
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
+	}
+
+	public Clima getClima() {
+		return clima;
+	}
+
+	public void setClima(Clima clima) {
+		this.clima = clima;
 	}
 	
 	
