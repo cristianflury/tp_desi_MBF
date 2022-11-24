@@ -2,10 +2,9 @@ package com.desi.smn.dto;
 
 import java.util.List;
 
-
 import com.desi.smn.model.Ciudad;
+import com.desi.smn.model.Evento;
 import com.desi.smn.model.Pronostico;
-import com.desi.smn.model.Provincia;
 
 public class CiudadDTO {
 	
@@ -14,6 +13,8 @@ public class CiudadDTO {
 	private Long idProvincia;
 	
 	private List<Pronostico> pronostico;
+	
+	private List<Evento> evento;
 	
 	public CiudadDTO() {
 		
@@ -24,6 +25,7 @@ public class CiudadDTO {
 		this.nombre = ciudad.getNombre();
 		this.idProvincia = ciudad.getProvincia().getId();
 		this.pronostico = ciudad.getPronostico();
+		this.evento = ciudad.getEvento();
 	}
 	
 	
@@ -33,6 +35,7 @@ public class CiudadDTO {
 		
 		ciudad.setNombre(this.nombre);
 		ciudad.setPronostico(this.pronostico);
+		ciudad.setEvento(this.evento);
 		
 		return ciudad;
 	}
@@ -59,6 +62,14 @@ public class CiudadDTO {
 
 	public void setPronostico(List<Pronostico> pronostico) {
 		this.pronostico = pronostico;
+	}
+
+	public List<Evento> getEvento() {
+		return evento;
+	}
+
+	public void setEvento(List<Evento> evento) {
+		this.evento = evento;
 	}
 	
 	

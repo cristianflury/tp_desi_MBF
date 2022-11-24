@@ -25,6 +25,8 @@ public class Ciudad {
 	@OneToMany(mappedBy = "ciudad")
 	private List<Pronostico> pronostico;
 	
+	@OneToMany(mappedBy = "ciudad")
+	private List<Evento> evento;
 
 	public Long getId() {
 		return id;
@@ -56,6 +58,14 @@ public class Ciudad {
 
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
+	}
+
+	public List<Evento> getEvento() {
+		return evento;
+	}
+
+	public void setEvento(List<Evento> evento) {
+		this.evento = evento;
 	}
 	
 	
