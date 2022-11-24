@@ -1,6 +1,8 @@
 package com.desi.smn.dto;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,7 +15,7 @@ public class EventoDTO {
 	
 	private Long idCiudad;
 	
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dia;
 
 	public EventoDTO() {

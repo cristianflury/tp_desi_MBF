@@ -1,5 +1,6 @@
 package com.desi.smn.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.desi.smn.model.Evento;
@@ -9,6 +10,7 @@ import com.desi.smn.service.IEventoService;
 @Service
 public class EventoServiceImpl implements IEventoService {
 
+	@Autowired
 	IEventoRepository repo;
 	
 	@Override
