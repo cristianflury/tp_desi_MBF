@@ -32,6 +32,7 @@ public class PronosticoController {
 		
 		pronostico.setCiudad(ciudadService.getById(pronosticoDTO.getIdCiudad()));
 		
+		
 		pronosticoService.guardar(pronostico);
 		
 		return "redirect:/pronostico";

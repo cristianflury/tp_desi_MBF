@@ -29,6 +29,9 @@ public class Ciudad {
 	@OneToOne
 	private Clima clima; //ESTE ES EL CAMBIO QUE AGREGUE, BORRAR COMENTARIO DSPS
 	
+	@OneToMany(mappedBy = "ciudad")
+	private List<Evento> evento;
+
 	public Long getId() {
 		return id;
 	}
@@ -67,6 +70,14 @@ public class Ciudad {
 
 	public void setClima(Clima clima) {
 		this.clima = clima;
+	}
+
+	public List<Evento> getEvento() {
+		return evento;
+	}
+
+	public void setEvento(List<Evento> evento) {
+		this.evento = evento;
 	}
 	
 	
