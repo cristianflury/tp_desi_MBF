@@ -27,6 +27,16 @@
 				</td>
 			</tr> 
 			<!-- Estado -->
+			<tr>
+				<td><label th:text="#{clima.estado}" /></td>
+				<td>
+			        <select th:field="*{idEstado}">
+					  <option th:each="estado : ${allEstados}" 
+					          th:value="${estado.id}" 
+					          th:text="${estado.estado}"></option>
+					</select>
+				</td>
+			</tr>
 			<!-- Temperatura -->
 			<tr>
 				<td><label th:text="#{clima.temp}" /></td>

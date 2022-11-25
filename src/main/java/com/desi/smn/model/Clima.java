@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -11,14 +13,13 @@ public class Clima {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@OneToOne
 	private Ciudad ciudad;
 	
-	private String estado; //Si esto sale de la DB Seria "private Estado estado;"
+	@ManyToOne
+	private Estado estado; //Si esto sale de la DB Seria "private Estado estado;"
 	private int temperatura; // >= 0
 	private int porcentajeHumedad; // >= 0
-	
 	
 	//Getter & Setter
 	public Long getId() {
@@ -33,10 +34,10 @@ public class Clima {
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	public int getTemperatura() {
