@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Registrar/Editar Clima</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<form th:action="@{/clima}" th:object="${climaDTO}" method="post">
+		<h1>
+			<th th:text="#{clima.listado}"></th>
+		</h1>
+		
+		<table class="resultados" border="1" style="align-self: center;">
+			<thead>
+				<tr>
+					<th><label th:text="#{clima.ciudad}"/></th>
+					<th><label th:text="#{clima.estado}"/></th>
+					<th><label th:text="#{clima.temp}"/></th>
+					<th><label th:text="#{clima.porcentaje.humedad}"/></th>
+					<th>Editar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="clima : ${resultados}">
+					<td th:text=${{clima.ciudad.nombre}}></td>
+					<td th:text=${{clima.estado}}></td>
+					<td th:text=${{clima.temperatura}}></td>
+					<td th:text=${{clima.porcentajeHumedad}}></td>
+					<td>
+						<a th:href="@{/climaEditar/{id}(id=${clima.id})}">
+	                        editar
+	                    </a>
+                    </td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- Botones -->
+		<table class="botones">
+			<tr>
+				<td><input type="submit" name="action" value="Guardar"/></td>
+				<td><input type="submit" name="action" value="Cancelar" /></td>
+<!--				<td><input type="submit" name="action" value="Actualizar" /></td>
+-->			</tr>
+		</table>
+		
+	</form>
+	
+	
+</body>
+</html>

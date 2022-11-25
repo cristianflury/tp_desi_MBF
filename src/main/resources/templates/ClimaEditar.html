@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Registrar/Editar Clima</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<form th:action="@{/climaEditar}" th:object="${climaDTO}" method="post">
+		<!-- Editar clima -->
+		<h1>
+			<th th:text="#{clima.editar}"></th>
+		</h1>
+		<input type="hidden" id="id" th:field="*{idCiudad}">
+		
+		<table border="0" style="align-self: center;">
+			<!-- Selector de ciudad -->
+			<tr>
+	            <td>
+	            	<label th:text="#{clima.ciudad}" />
+            	</td>
+	            <td>
+			        <select th:field="*{idCiudad}" disabled>
+					  <option th:each="ciudad : ${allCiudades}" 
+					          th:value="${ciudad.id}" 
+					          th:text="${ciudad.nombre}"></option>
+					</select>
+				</td>
+			</tr> 
+			<!-- Estado -->
+			<!-- Temperatura -->
+			<tr>
+				<td><label th:text="#{clima.temp}" /></td>
+				<td><input type="number" th:field="*{temperatura}" /></td>
+			</tr>
+			<!-- Porcentaje de humedad -->
+			<tr>
+				<td><label th:text="#{clima.porcentaje.humedad}" /></td>
+				<td><input type="number" th:field="*{porcentajeHumedad}" /></td>
+			</tr>
+		</table>
+		
+		<!-- Botones -->
+		<table class="botones">
+			<tr>
+				<td><input type="submit" name="action" value="Guardar"/></td>
+				<td><input type="submit" name="action" value="Cancelar" /></td>
+			</tr>
+		</table>
+	</form>
+	
+	
+</body>
+</html>

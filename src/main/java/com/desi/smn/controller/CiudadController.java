@@ -34,7 +34,6 @@ public class CiudadController {
 		Ciudad ciudad = ciudadDTO.toModel();
 
 		ciudad.setProvincia(provinciaService.getById(ciudadDTO.getIdProvincia()));
-		ciudad.setClima(climaService.getById(ciudadDTO.getIdClima()));
 		ciudadService.guardar(ciudad);
 
 		return "redirect:/ciudad";
