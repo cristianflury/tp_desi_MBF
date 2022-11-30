@@ -4,8 +4,8 @@ package com.desi.smn.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,13 +15,13 @@ import com.desi.smn.model.Evento;
 public class EventoDTO {
 	
 	@NotNull
-	@Max(value = 500, message = "El valor máximo permitido es 100")
+	@Size(min = 0, max = 500, message = "El valor debe estar entre 0 y 500")
 	private String descripcion;
 	
 	@NotNull
 	private Long idCiudad;
 	
-	@NotNull
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dia;
 

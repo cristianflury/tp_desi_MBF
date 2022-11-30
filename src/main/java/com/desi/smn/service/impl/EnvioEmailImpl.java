@@ -8,23 +8,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class EnvioEmailImpl  {
 
-	@Autowired
-	private JavaMailSender mailSender;
+//	@Autowired
+//	private JavaMailSender mailSender;
 	
 	
-	public EnvioEmailImpl(JavaMailSender mailSender) {
-		this.mailSender= mailSender;
-	}
+//	public EnvioEmailImpl(JavaMailSender mailSender) {
+//		this.mailSender= mailSender;
+//	}
 	
-	public void envioEmail(String to, String subject, String content) {
-		
-		 SimpleMailMessage email = new SimpleMailMessage();
+//	public void envioEmail(String to, String subject, String content) {		
+//		 SimpleMailMessage email = new SimpleMailMessage();
 
-	     email.setTo(to);
-	     email.setSubject(subject);
-	     email.setText(content);
+//	     email.setTo(to);
+//	     email.setSubject(subject);
+//	     email.setText(content);
 
-	     mailSender.send(email);
-	}
+//	     mailSender.send(email);
+//	}
 
 }

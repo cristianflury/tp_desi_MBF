@@ -53,7 +53,7 @@ public class EventoEditarController {
  
     @PostMapping("/evento")
     @RequestMapping( method=RequestMethod.POST)
-    public String guardar(@ModelAttribute("eventoDTO") @Valid EventoDTO eventoDTO, @RequestParam("email")String mail, BindingResult result, ModelMap modelo, @RequestParam String action) {
+    public String guardar(@ModelAttribute("eventoDTO") @Valid EventoDTO eventoDTO, BindingResult result, ModelMap modelo, @RequestParam String action) {
     	
     	
     	if(action.equals("Aceptar"))
@@ -74,9 +74,8 @@ public class EventoEditarController {
     		    	
     		    	servicioEvento.save(evento);
     		    	
-    		    	String subject = "SMN - Alerta Meteorológica";
-    		    	
-    		    	servicioEmail.envioEmail(mail, subject, evento.getDescripcion());
+    		    //	String subject = "SMN - Alerta Meteorológica";
+    		    //	servicioEmail.envioEmail(mail, subject, evento.getDescripcion());
     			
     		    	return "redirect:/index";
     		    	
@@ -92,7 +91,7 @@ public class EventoEditarController {
     		modelo.clear();
     		return "redirect:/index";
     	}
-    	return "redirect:/";	
+    	return "redirect:/index";	
     	
     	}	
     	
