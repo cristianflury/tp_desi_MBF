@@ -59,21 +59,26 @@ public class ClimaEditarController {
 	}
 	
     @RequestMapping( method=RequestMethod.POST)
-    public String submit(@ModelAttribute("climaDTO") @Valid  ClimaDTO climaDTO, BindingResult result, ModelMap modelo,@RequestParam String action) {
+    public String submit(@Valid @ModelAttribute("climaDTO") ClimaDTO climaDTO, BindingResult result, ModelMap modelo,@RequestParam String action) {
     	if(action.equals("Guardar")) {
-			Clima clima = climaDTO.toModel();
-			
-			clima.setCiudad(ciudadService.getById(climaDTO.getIdCiudad()));
-			clima.setEstado(estadoService.getById(climaDTO.getIdEstado()));
-			for (Clima c : climaService.getAll()) {
-				if(c.getCiudad().getId().equals(clima.getCiudad().getId())) {
-					clima.setId(c.getId());
-					break;
+    		if(result.hasErrors()) {
+				modelo.addAttribute("climaDTO", climaDTO);
+				return "climaEditar";
+			}else {
+				
+				Clima clima = climaDTO.toModel();
+				clima.setCiudad(ciudadService.getById(climaDTO.getIdCiudad()));
+				clima.setEstado(estadoService.getById(climaDTO.getIdEstado()));
+				for (Clima c : climaService.getAll()) {
+					if(c.getCiudad().getId().equals(clima.getCiudad().getId())) {
+						clima.setId(c.getId());
+						break;
+					}
 				}
+				climaService.guardar(clima);
+				
+				return "redirect:/clima";    	
 			}
-			climaService.guardar(clima);
-			
-			return "redirect:/clima";        	
     	}else if(action.equals("Cancelar")){
     		modelo.clear();
     		return "redirect:/clima";

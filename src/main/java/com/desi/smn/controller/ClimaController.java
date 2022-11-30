@@ -2,9 +2,13 @@ package com.desi.smn.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,30 +35,39 @@ public class ClimaController {
 	@Autowired
 	private IEstadoService estadoService;
 
-	
-	//CLASE 8, min 57 seguramente me sirva para cuando quiera hacer el editar
 	@RequestMapping(method = RequestMethod.POST)
-	public String submit(@ModelAttribute("climaDTO") ClimaDTO climaDTO, ModelMap modelo,@RequestParam String action) {
+	public String submit(@Valid @ModelAttribute("climaDTO") ClimaDTO climaDTO, BindingResult result, ModelMap modelo,@RequestParam String action) {
 		if(action.equals("Registrar")) {
-			Clima clima = climaDTO.toModel();
 			
-			clima.setCiudad(ciudadService.getById(climaDTO.getIdCiudad()));
-			clima.setEstado(estadoService.getById(climaDTO.getIdEstado()));
+			
 			for (Clima c : climaService.getAll()) {
-				if(c.getCiudad().getId().equals(clima.getCiudad().getId())) {
-					clima.setId(c.getId());
+				if(c.getCiudad().getId().equals(climaDTO.getIdCiudad())) {
+					ObjectError error = new ObjectError("ciudadRegistrada", "La ciudad ingresada ya tiene un clima registrado");
+					result.addError(error);
 					break;
 				}
 			}
-			climaService.guardar(clima);
 			
-			return "redirect:/clima";		
-			
+			if(result.hasErrors()) {
+				List<Clima> clima = climaService.getAll();
+				modelo.addAttribute("resultados", clima);
+				modelo.addAttribute("climaDTO", climaDTO);
+				return "clima";
+			}else {
+				Clima clima = climaDTO.toModel();
+				clima.setCiudad(ciudadService.getById(climaDTO.getIdCiudad()));
+				clima.setEstado(estadoService.getById(climaDTO.getIdEstado()));
+				
+				climaService.guardar(clima);
+				
+				return "redirect:/clima";		
+			}
 		}
 		else {
 			return "redirect:/";
 		}
 	}
+	
 	@ModelAttribute("allCiudades")
 	public List<Ciudad> getAllCiudades() {
 		return this.ciudadService.getAll();

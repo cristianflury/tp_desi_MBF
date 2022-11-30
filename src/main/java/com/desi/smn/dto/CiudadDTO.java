@@ -14,8 +14,8 @@ public class CiudadDTO {
 	
 	private List<Pronostico> pronostico;
 
-	private Long idClima; //PREGUNTAR SI VA ID O VA LA VARIABLE CLIMA DE TIPO CLIMA
-	//ABAJO DEJE MÁS COMENTARIOS
+	private Long idClima;
+	
 	private List<Evento> evento;
 	
 	public CiudadDTO() {
@@ -27,7 +27,7 @@ public class CiudadDTO {
 		this.nombre = ciudad.getNombre();
 		this.idProvincia = ciudad.getProvincia().getId();
 		this.pronostico = ciudad.getPronostico();
-		this.idClima = ciudad.getClima().getId(); //PREGUNTAR SI VA ID O VA LA VARIABLE CLIMA DE TIPO CLIMA
+		this.idClima = ciudad.getClima().getId(); 
 		this.evento = ciudad.getEvento();
 	}
 	
@@ -67,7 +67,6 @@ public class CiudadDTO {
 		this.pronostico = pronostico;
 	}
 
-	//VERIFICAR ESTOS GET Y SET
 	public Long getIdClima() {
 		return idClima;
 	}

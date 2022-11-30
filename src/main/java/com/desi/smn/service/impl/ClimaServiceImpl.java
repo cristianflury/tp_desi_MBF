@@ -21,8 +21,6 @@ public class ClimaServiceImpl implements IClimaService{
 		climaRepository.save(clima);			
 	}
 	
-	//FALTA BUSCAR !!!CIUDAD!!! POR getById(Long id) ID 
-	
 	@Override
 	public Clima getById(Long id) {
 		return climaRepository.findById(id).orElse(null);

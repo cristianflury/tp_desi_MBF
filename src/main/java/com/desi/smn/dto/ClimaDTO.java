@@ -1,5 +1,8 @@
 package com.desi.smn.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.springframework.lang.NonNull;
 
 //import javax.validation.constraints.Max;
@@ -7,17 +10,21 @@ import org.springframework.lang.NonNull;
 //import javax.validation.constraints.Size;
 
 import com.desi.smn.model.Clima;
-import com.desi.smn.model.Estado;
 
 public class ClimaDTO {
 	private Long id;
 	@NonNull
 	private Long idCiudad;
+	@NonNull
 	private Long idEstado;
-//	@Min(value = 0, message = "El valor mínimo permitido es 0")
-//	@Max(value = 100, message = "El valor máximo permitido es 100")
+	@NonNull
+	@Min(value = 0, message = "El valor mínimo permitido es 0")
+	@Max(value = 100, message = "El valor máximo permitido es 100")
 	private int temperatura;
 //	@Size(min = 0, max = 100, message = "El valor debe estar entre 0 y 100 (incluidos)")
+	@NonNull
+	@Min(value = 0, message = "El valor mínimo permitido es 0")
+	@Max(value = 100, message = "El valor máximo permitido es 100")
 	private int porcentajeHumedad;
 
 	public ClimaDTO() {
@@ -36,15 +43,22 @@ public class ClimaDTO {
 	// toModel
 	public Clima toModel() {
 		Clima clima = new Clima();
-
 		clima.setId(this.id);
 		clima.setTemperatura(this.temperatura);
 		clima.setPorcentajeHumedad(this.porcentajeHumedad);
 
 		return clima;
 	}
-
+	
 	// Getter & Setter
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public Long getIdCiudad() {
 		return idCiudad;
 	}

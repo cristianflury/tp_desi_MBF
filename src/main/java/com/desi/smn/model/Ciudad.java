@@ -26,8 +26,8 @@ public class Ciudad {
 	@OneToMany(mappedBy = "ciudad")
 	private List<Pronostico> pronostico;
 	
-	@OneToOne
-	private Clima clima; //ESTE ES EL CAMBIO QUE AGREGUE, BORRAR COMENTARIO DSPS
+	@OneToOne(mappedBy = "ciudad")
+	private Clima clima; 
 	
 	@OneToMany(mappedBy = "ciudad")
 	private List<Evento> evento;

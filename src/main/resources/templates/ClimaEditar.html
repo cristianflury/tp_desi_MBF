@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Registrar/Editar Clima</title>
+	<title>Editar Clima</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+	<!-- Editar clima -->
+	<h1>
+		<th th:text="#{clima.editar}"></th>
+	</h1>
 	<form th:action="@{/climaEditar}" th:object="${climaDTO}" method="post">
-		<!-- Editar clima -->
-		<h1>
-			<th th:text="#{clima.editar}"></th>
-		</h1>
-		<input type="hidden" id="id" th:field="*{idCiudad}">
+		<input type="hidden" th:field="*{idCiudad}" />
 		
 		<table border="0" style="align-self: center;">
 			<!-- Selector de ciudad -->
@@ -25,6 +25,7 @@
 					          th:text="${ciudad.nombre}"></option>
 					</select>
 				</td>
+				<td><p th:each="error : ${#fields.errors('global')}" th:text="${error}" style="color: red;"/></td>
 			</tr> 
 			<!-- Estado -->
 			<tr>
@@ -36,16 +37,19 @@
 					          th:text="${estado.estado}"></option>
 					</select>
 				</td>
+				<td><p th:if="${#fields.hasErrors('idEstado')}" th:errorclass="error" th:errors="*{idEstado}" style="color: red;"/></td>
 			</tr>
 			<!-- Temperatura -->
 			<tr>
 				<td><label th:text="#{clima.temp}" /></td>
 				<td><input type="number" th:field="*{temperatura}" /></td>
+				<td><p th:if="${#fields.hasErrors('temperatura')}" th:errorclass="error" th:errors="*{temperatura}" style="color: red;"/></td>
 			</tr>
 			<!-- Porcentaje de humedad -->
 			<tr>
 				<td><label th:text="#{clima.porcentaje.humedad}" /></td>
 				<td><input type="number" th:field="*{porcentajeHumedad}" /></td>
+				<td><p th:if="${#fields.hasErrors('porcentajeHumedad')}" th:errorclass="error" th:errors="*{porcentajeHumedad}" style="color: red;"/></td>
 			</tr>
 		</table>
 		
