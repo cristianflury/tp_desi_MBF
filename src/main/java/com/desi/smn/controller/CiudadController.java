@@ -12,6 +12,7 @@ import com.desi.smn.dto.CiudadDTO;
 import com.desi.smn.model.Ciudad;
 import com.desi.smn.model.Provincia;
 import com.desi.smn.service.ICiudadService;
+import com.desi.smn.service.IClimaService;
 import com.desi.smn.service.IProvinciaService;
 
 @Controller
@@ -23,6 +24,9 @@ public class CiudadController {
 
 	@Autowired
 	private IProvinciaService provinciaService;
+	
+	@Autowired(required = false)
+	private IClimaService climaService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String guardar(@ModelAttribute("ciudadDTO") CiudadDTO ciudadDTO) {
