@@ -18,7 +18,6 @@ public interface IEventoService {
 	
 	void save(Evento c);
 	
-	Evento envioEmail();
 	
 	
 }

@@ -7,6 +7,7 @@ import com.desi.smn.model.Evento;
 import com.desi.smn.repository.IEventoRepository;
 import com.desi.smn.service.IEventoService;
 
+
 @Service
 public class EventoServiceImpl implements IEventoService {
 
@@ -25,10 +26,5 @@ public class EventoServiceImpl implements IEventoService {
 	}
 	
 
-	@Override
-	public Evento envioEmail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

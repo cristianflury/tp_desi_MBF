@@ -13,6 +13,8 @@ public class CiudadDTO {
 	private Long idProvincia;
 	
 	private List<Pronostico> pronostico;
+
+	private Long idClima;
 	
 	private List<Evento> evento;
 	
@@ -25,6 +27,7 @@ public class CiudadDTO {
 		this.nombre = ciudad.getNombre();
 		this.idProvincia = ciudad.getProvincia().getId();
 		this.pronostico = ciudad.getPronostico();
+		this.idClima = ciudad.getClima().getId(); 
 		this.evento = ciudad.getEvento();
 	}
 	
@@ -64,6 +67,14 @@ public class CiudadDTO {
 		this.pronostico = pronostico;
 	}
 
+	public Long getIdClima() {
+		return idClima;
+	}
+
+	public void setIdClima(Long idClima) {
+		this.idClima = idClima;
+	}
+	
 	public List<Evento> getEvento() {
 		return evento;
 	}

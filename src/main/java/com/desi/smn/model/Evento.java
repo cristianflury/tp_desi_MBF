@@ -20,13 +20,12 @@ public class Evento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable=false, length = 500)
+	
 	private String descripcion;
 	
 	@ManyToOne
 	private Ciudad ciudad;
 	
-	@Column(nullable=false)
 	private Date dia;
 
 	public Long getId() {

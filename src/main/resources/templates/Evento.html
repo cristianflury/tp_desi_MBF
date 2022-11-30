@@ -25,13 +25,13 @@
 			<tr>
 	            <td><label th:text="#{evento.dia}"/>
 	            <td><input type="date" id="dia" autocomplete="off" th:field="*{dia}" /></td>
-           
+           	<td><p th:if="${#fields.hasErrors('dia')}" th:errorclass="error" th:errors="*{dia}" /></td>
 	        </tr>
 	        <tr>
 	            <td><label th:text="#{evento.descripcion}" /></td>
 	            <td><label path = "descripcion" /></td>
-            	<td><textarea path = "descripcion"  rows = "5" cols = "30"></textarea></td>
-	             
+            	<td><textarea th:field="*{descripcion}"  rows = "5" cols = "30"></textarea></td>
+	            <td><p th:if="${#fields.hasErrors('descripcion')}" th:errorclass="error" th:errors="*{descripcion}" /></td>
 	        </tr>
 	        
 	        <tr>
@@ -44,6 +44,11 @@
 					</select>
 				</td>
 			</tr>
+			<tr>
+	            <td><label th:text="#{evento.email}"/>
+	            <td><input type="email" id="email" name="email" autocomplete="off" /></td>
+           
+	        </tr>
 	        
 	         
 	  </table>

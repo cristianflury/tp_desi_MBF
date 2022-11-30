@@ -3,28 +3,39 @@ package com.desi.smn.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.desi.smn.dto.EventoDTO;
 import com.desi.smn.model.Ciudad;
 import com.desi.smn.model.Evento;
 import com.desi.smn.service.ICiudadService;
 import com.desi.smn.service.IEventoService;
+import com.desi.smn.service.impl.EnvioEmailImpl;
 
 
 
 @Controller
 @RequestMapping("/evento")
 public class EventoEditarController {
-	@Autowired
+	
+	@Autowired(required=false)
     private IEventoService servicioEvento;
 	
 	@Autowired
     private ICiudadService servicioCiudad;
+	
+	@Autowired
+	private EnvioEmailImpl servicioEmail;
  
      
     @ModelAttribute("allCiudades")
@@ -40,68 +51,53 @@ public class EventoEditarController {
 		return "evento";
     }
  
-    
+    @PostMapping("/evento")
     @RequestMapping( method=RequestMethod.POST)
-    public String guardar(@ModelAttribute("eventoDTO") EventoDTO eventoDTO) {
-    	
-    	Evento evento = eventoDTO.toModel();
-    	
-    	evento.setCiudad(servicioCiudad.getById(eventoDTO.getIdCiudad()));
-    	
-    	servicioEvento.save(evento);
+    public String guardar(@ModelAttribute("eventoDTO") @Valid EventoDTO eventoDTO, @RequestParam("email")String mail, BindingResult result, ModelMap modelo, @RequestParam String action) {
     	
     	
-//    	if(action.equals("Aceptar"))
- //   	{
+    	if(action.equals("Aceptar"))
+    	{
     		
- //   		if(result.hasErrors())
- //   		{
+    		if(result.hasErrors())
+    		{
+
+    			modelo.addAttribute("eventoDTO",eventoDTO);
+   			   return "evento";
+    		}
+    		else
+    		{
+
+    				Evento evento = eventoDTO.toModel();
+    		    	
+    		    	evento.setCiudad(servicioCiudad.getById(eventoDTO.getIdCiudad()));
+    		    	
+    		    	servicioEvento.save(evento);
+    		    	
+    		    	String subject = "SMN - Alerta Meteorológica";
+    		    	
+    		    	servicioEmail.envioEmail(mail, subject, evento.getDescripcion());
     			
-                
-//    			modelo.addAttribute("formBean",formBean);
-//    			 return "eventoEditar";
-//    		}
-//    		else
-//    		{
-    		//	try {
-//    			Evento e =formBean.toPojo();
-//    			e.setCiudad(servicioCiudad.getById(formBean.getIdCiudad()));
-//    			servicioEvento.save(e);
-    			
-//    			return "redirect:/";
- //   			} catch (Excepcion e) {
-//					if(e.getAtributo()==null) //si la excepcion estuviera referida a un atributo del objeto, entonces mostrarlo al lado del compornente (ej. dni)
-//					{
-//						ObjectError error = new ObjectError("globalError", e.getMessage());
-//			            result.addError(error);
-//					}
-//					else
-//					{
-//			    		FieldError error1 = new FieldError("formBean",e.getAtributo(),e.getMessage());
-//			            result.addError(error1);
-//
-//					}
-//		            modelo.addAttribute("formBean",formBean);
-//	    			return "ciudadEditar";  //Como existe un error me quedo en la misma pantalla
-//				}
- //   		}
+    		    	return "redirect:/index";
+    		    	
+    		}
 
     	
         	
-  //  	}
+    	}
     
     	
-//    	if(action.equals("Cancelar"))
- //   	{
- //   		modelo.clear();
- //   		return "redirect:/";
- //   	}
-  //  		
-    	return "redirect:/evento";
+    	if(action.equals("Cancelar"))
+    	{
+    		modelo.clear();
+    		return "redirect:/index";
+    	}
+    	return "redirect:/";	
     	
+    	}	
     	
     }
 
  
-}
+
 
