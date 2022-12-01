@@ -1,13 +1,14 @@
 package com.desi.smn.dto;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import com.desi.smn.model.Pronostico;
 
 public class PronosticoDTO {
 	
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaPronosticada;
 	
 	private Integer probabilidadLluvia;

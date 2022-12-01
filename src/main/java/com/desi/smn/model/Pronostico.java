@@ -1,8 +1,10 @@
 package com.desi.smn.model;
 
-import java.sql.Date;
 
-import javax.persistence.Column;
+
+
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
