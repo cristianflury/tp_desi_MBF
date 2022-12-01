@@ -25,13 +25,13 @@
 			<tr>
 	            <td><label th:text="#{evento.dia}"/>
 	            <td><input type="date" id="dia" autocomplete="off" th:field="*{dia}" /></td>
-           	<td><p th:if="${#fields.hasErrors('dia')}" th:errorclass="error" th:errors="*{dia}" /></td>
+           	<td><p th:if="${#fields.hasErrors('dia')}" th:errorclass="error" th:errors="*{dia}" style="color: red;" /></td>
 	        </tr>
 	        <tr>
 	            <td><label th:text="#{evento.descripcion}" /></td>
 	            <td><label path = "descripcion" /></td>
             	<td><textarea th:field="*{descripcion}"  rows = "5" cols = "30"></textarea></td>
-	            <td><p th:if="${#fields.hasErrors('descripcion')}" th:errorclass="error" th:errors="*{descripcion}" /></td>
+	            <td><p th:if="${#fields.hasErrors('descripcion')}" th:errorclass="error" th:errors="*{descripcion}" style="color: red;"/></td> 
 	        </tr>
 	        
 	        <tr>
@@ -44,6 +44,7 @@
 					</select>
 				</td>
 			</tr>
+			<td><p th:each="error : ${#fields.errors('global')}" th:text="${error}" style="color: red;"/></td>
 		
 	        
 	         

@@ -63,7 +63,7 @@ public class EventoEditarController {
     		{
 
     			modelo.addAttribute("eventoDTO",eventoDTO);
-   			   return "evento";
+   			  	return "evento";
     		}
     		else
     		{
@@ -77,7 +77,7 @@ public class EventoEditarController {
     		    //	String subject = "SMN - Alerta Meteorológica";
     		    //	servicioEmail.envioEmail(mail, subject, evento.getDescripcion());
     			
-    		    	return "redirect:/index";
+    		    	return "redirect:/";
     		    	
     		}
 
@@ -89,9 +89,9 @@ public class EventoEditarController {
     	if(action.equals("Cancelar"))
     	{
     		modelo.clear();
-    		return "redirect:/index";
+    		return "redirect:/";
     	}
-    	return "redirect:/index";	
+    	return "redirect:/evento";	
     	
     	}	
     	
