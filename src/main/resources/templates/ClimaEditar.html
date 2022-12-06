@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Editar Clima</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<!-- Editar clima -->
+	<h1>
+		<th th:text="#{clima.editar}"></th>
+	</h1>
+	<form th:action="@{/climaEditar}" th:object="${climaDTO}" method="post">
+		<input type="hidden" th:field="*{idCiudad}" />
+		
+		<table border="0" style="align-self: center;">
+			<!-- Selector de ciudad -->
+			<tr>
+	            <td>
+	            	<label th:text="#{clima.ciudad}" />
+            	</td>
+	            <td>
+			        <select th:field="*{idCiudad}" disabled>
+					  <option th:each="ciudad : ${allCiudades}" 
+					          th:value="${ciudad.id}" 
+					          th:text="${ciudad.nombre}"></option>
+					</select>
+				</td>
+				<td><p th:each="error : ${#fields.errors('global')}" th:text="${error}" style="color: red;"/></td>
+			</tr> 
+			<!-- Estado -->
+			<tr>
+				<td><label th:text="#{clima.estado}" /></td>
+				<td>
+			        <select th:field="*{idEstado}">
+					  <option th:each="estado : ${allEstados}" 
+					          th:value="${estado.id}" 
+					          th:text="${estado.estado}"></option>
+					</select>
+				</td>
+				<td><p th:if="${#fields.hasErrors('idEstado')}" th:errorclass="error" th:errors="*{idEstado}" style="color: red;"/></td>
+			</tr>
+			<!-- Temperatura -->
+			<tr>
+				<td><label th:text="#{clima.temp}" /></td>
+				<td><input type="number" th:field="*{temperatura}" /></td>
+				<td><p th:if="${#fields.hasErrors('temperatura')}" th:errorclass="error" th:errors="*{temperatura}" style="color: red;"/></td>
+			</tr>
+			<!-- Porcentaje de humedad -->
+			<tr>
+				<td><label th:text="#{clima.porcentaje.humedad}" /></td>
+				<td><input type="number" th:field="*{porcentajeHumedad}" /></td>
+				<td><p th:if="${#fields.hasErrors('porcentajeHumedad')}" th:errorclass="error" th:errors="*{porcentajeHumedad}" style="color: red;"/></td>
+			</tr>
+		</table>
+		
+		<!-- Botones -->
+		<table class="botones">
+			<tr>
+				<td><input type="submit" name="action" value="Guardar"/></td>
+				<td><input type="submit" name="action" value="Cancelar" /></td>
+			</tr>
+		</table>
+	</form>
+	
+	
+</body>
+</html>

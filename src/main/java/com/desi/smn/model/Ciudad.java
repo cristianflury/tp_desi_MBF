@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Ciudad {
@@ -25,6 +26,11 @@ public class Ciudad {
 	@OneToMany(mappedBy = "ciudad")
 	private List<Pronostico> pronostico;
 	
+	@OneToOne(mappedBy = "ciudad")
+	private Clima clima; 
+	
+	@OneToMany(mappedBy = "ciudad")
+	private List<Evento> evento;
 
 	public Long getId() {
 		return id;
@@ -56,6 +62,22 @@ public class Ciudad {
 
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
+	}
+
+	public Clima getClima() {
+		return clima;
+	}
+
+	public void setClima(Clima clima) {
+		this.clima = clima;
+	}
+
+	public List<Evento> getEvento() {
+		return evento;
+	}
+
+	public void setEvento(List<Evento> evento) {
+		this.evento = evento;
 	}
 	
 	
