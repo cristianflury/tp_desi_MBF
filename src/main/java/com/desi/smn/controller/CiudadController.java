@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.desi.smn.dto.CiudadDTO;
 import com.desi.smn.model.Ciudad;
@@ -29,15 +30,23 @@ public class CiudadController {
 	private IClimaService climaService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String guardar(@ModelAttribute("ciudadDTO") CiudadDTO ciudadDTO) {
+	public String guardar(@ModelAttribute("ciudadDTO") CiudadDTO ciudadDTO, @RequestParam String action) {
+		
+		if("Aceptar".equals(action)) {
+			
+			Ciudad ciudad = ciudadDTO.toModel();
 
-		Ciudad ciudad = ciudadDTO.toModel();
+			ciudad.setProvincia(provinciaService.getById(ciudadDTO.getIdProvincia()));
+			ciudadService.guardar(ciudad);
 
-		ciudad.setProvincia(provinciaService.getById(ciudadDTO.getIdProvincia()));
-		ciudadService.guardar(ciudad);
+			return "redirect:/ciudad";
+	
+		} else {
+			
+			return "redirect:/";
+		}
 
-		return "redirect:/ciudad";
-
+		
 	}
 
 	@ModelAttribute("allProvincias")

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.desi.smn.dto.ProvinciaDTO;
 import com.desi.smn.service.IProvinciaService;
@@ -17,11 +18,20 @@ public class ProvinciaController {
 	private IProvinciaService provinciaService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String guardar(@ModelAttribute("provinciaDTO")ProvinciaDTO provinciaDTO) {
+	public String guardar(@ModelAttribute("provinciaDTO")ProvinciaDTO provinciaDTO, @RequestParam String action) {
 		
-		provinciaService.guardar(provinciaDTO.toModel());
+		if("Aceptar".equals(action)) {
+			
+			provinciaService.guardar(provinciaDTO.toModel());
+			
+			return "redirect:/provincia";
+			
+		} else {
+			
+			return "redirect:/";
+		}
 		
-		return "redirect:/provincia";
+		
 		
 		
 	}

@@ -7,5 +7,6 @@ import com.desi.smn.model.Pronostico;
 
 @Repository
 public interface IPronosticoRepository extends JpaRepository<Pronostico, Long> {
+	
 
 }

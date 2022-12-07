@@ -27,8 +27,14 @@ public class CiudadDTO {
 		this.nombre = ciudad.getNombre();
 		this.idProvincia = ciudad.getProvincia().getId();
 		this.pronostico = ciudad.getPronostico();
-		this.idClima = ciudad.getClima().getId(); 
-		this.evento = ciudad.getEvento();
+		if(ciudad.getClima() != null) {
+			this.idClima = ciudad.getClima().getId();
+		}
+		if(ciudad.getEvento() != null) {
+			this.evento = ciudad.getEvento();
+		}
+		 
+		
 	}
 	
 	
