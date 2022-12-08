@@ -2,7 +2,6 @@ package com.desi.smn.model;
 
 import java.util.List;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +30,9 @@ public class Ciudad {
 	
 	@OneToMany(mappedBy = "ciudad")
 	private List<Evento> evento;
+	
+	@OneToMany(mappedBy = "ciudad")
+	private List<Subscripto> subscripto;
 
 	public Long getId() {
 		return id;

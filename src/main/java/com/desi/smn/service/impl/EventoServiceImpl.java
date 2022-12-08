@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.desi.smn.model.Evento;
 import com.desi.smn.repository.IEventoRepository;
+import com.desi.smn.service.IEnvioEmail;
 import com.desi.smn.service.IEventoService;
 
 
@@ -13,6 +14,9 @@ public class EventoServiceImpl implements IEventoService {
 
 	@Autowired
 	IEventoRepository repo;
+	
+	@Autowired
+	private IEnvioEmail envioEmail;
 	
 	@Override
 	public Evento getById(Long idEvento) {
@@ -23,8 +27,8 @@ public class EventoServiceImpl implements IEventoService {
 	public void save(Evento c) {
 		repo.save(c);
 		
+		envioEmail.enviarEmail();
+		
 	}
-	
-
 
 }

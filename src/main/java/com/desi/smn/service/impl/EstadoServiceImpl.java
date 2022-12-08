@@ -12,14 +12,11 @@ import com.desi.smn.repository.IEstadoRepository;
 import com.desi.smn.service.IEstadoService;
 
 @Service
-public class EstadoServiceImpl implements IEstadoService, ApplicationRunner{
+public class EstadoServiceImpl implements IEstadoService {
+	
 	@Autowired
 	private IEstadoRepository estadoRepository;
 	
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		cargarDatos();
-	}
 
 	@Override
 	public void guardar(Estado estado) {
@@ -41,28 +38,6 @@ public class EstadoServiceImpl implements IEstadoService, ApplicationRunner{
 		return estadoRepository.findByEstado(estado);
 	}
 	
-	//Cargar datos (si no existen) apenas inicia la App
-	private void cargarDatos() {
-		if(getByEstado("Despejado") == null) {
-			Estado estado = new Estado();	
-			estado.setEstado("Despejado");
-			estadoRepository.save(estado);		
-		}
-		if(getByEstado("Nublado") == null) {
-			Estado estado = new Estado();	
-			estado.setEstado("Nublado");
-			estadoRepository.save(estado);		
-		}
-		if(getByEstado("Lluvioso") == null) {
-			Estado estado = new Estado();	
-			estado.setEstado("Lluvioso");
-			estadoRepository.save(estado);		
-		}
-		if(getByEstado("Nevando") == null) {
-			Estado estado = new Estado();	
-			estado.setEstado("Nevando");
-			estadoRepository.save(estado);
-		}
-	}
+	
 	
 }
