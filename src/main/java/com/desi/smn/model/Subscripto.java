@@ -54,12 +54,7 @@ public class Subscripto {
 	public void setCiudad(Optional<Ciudad> findById) {
 		
 		
-	}
-
-	
-
-	
-	
+	}	
 	
 
 }

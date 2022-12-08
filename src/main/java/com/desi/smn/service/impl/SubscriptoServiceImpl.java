@@ -13,7 +13,7 @@ import com.desi.smn.repository.ISubscriptoRepository;
 import com.desi.smn.service.ISubscriptoService;
 
 @Service
-public class SubscriptoServiceImpl implements ISubscriptoService, ApplicationRunner {
+public class SubscriptoServiceImpl implements ISubscriptoService {
 	
 	@Autowired(required=true)
 	ISubscriptoRepository repo;
@@ -21,10 +21,6 @@ public class SubscriptoServiceImpl implements ISubscriptoService, ApplicationRun
 	@Autowired
 	ICiudadRepository repoCiudad;
 	
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		cargarDatosSubs();
-	}
 	
 	@Override
 	public void save(Subscripto p) {
@@ -41,39 +37,6 @@ public class SubscriptoServiceImpl implements ISubscriptoService, ApplicationRun
 		
 		return repo.findByDni(dni);
 	}
-	
-	
-	
-		private void cargarDatosSubs() {
-			if(getByDni(34568745) == null) {
-				
-				Subscripto persona1 = new Subscripto();	
-				persona1.setDni(34568745);
-    		    persona1.setNombre("Roberto");
-    		    persona1.setEmail("roberto@gmail.com");
-    		    persona1.setCiudad(repoCiudad.findById((long)1));
-				repo.save(persona1);
-				}	
-				
-			if(getByDni(350024585) == null) {
-				Subscripto persona2 = new Subscripto();	
-				persona2.setDni(350024585);
-    		    persona2.setNombre("Juan");
-    		    persona2.setEmail("juan@gmail.com");
-    		    persona2.setCiudad(repoCiudad.findById((long) 3));;
-				repo.save(persona2);
-				}	
-				
-			if(getByDni(350000585) == null) {
-				Subscripto persona3 = new Subscripto();	
-				persona3.setDni(350000585);
-    		    persona3.setNombre("Pedro");
-    		    persona3.setEmail("pedro@gmail.com");
-    		    persona3.setCiudad(repoCiudad.findById((long) 3));;
-				repo.save(persona3);
-			}
-		}
-	
-	
+		
 
 }
