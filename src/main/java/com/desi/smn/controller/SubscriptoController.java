@@ -16,9 +16,9 @@ public class SubscriptoController {
 	private ISubscriptoService servicioSubscripto;
 	
 	
-	@ModelAttribute("allSubscriptos")
-	public List<Subscripto> getAllSubscriptos() {
-		return this.servicioSubscripto.getAll();
-	}
+	//@ModelAttribute("allSubscriptos")
+	//public List<Subscripto> getAllSubscriptos() {
+	//	return this.servicioSubscripto.getAll();
+	//}
 
 }
