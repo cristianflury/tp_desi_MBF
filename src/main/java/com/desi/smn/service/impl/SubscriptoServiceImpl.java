@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Service;
 
 import com.desi.smn.model.Subscripto;
 import com.desi.smn.repository.ICiudadRepository;
 import com.desi.smn.repository.ISubscriptoRepository;
 import com.desi.smn.service.ISubscriptoService;
 
+@Service
 public class SubscriptoServiceImpl implements ISubscriptoService, ApplicationRunner {
 	
 	@Autowired(required=true)
