@@ -8,4 +8,5 @@ public interface IEstadoService {
 	List<Estado> getAll();
 	void guardar(Estado estado);
 	Estado getById(Long id);
+	Estado getByEstado (String estado);
 }

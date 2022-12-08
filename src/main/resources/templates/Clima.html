@@ -3,94 +3,120 @@
 <head>
 	<title>Registrar/Editar Clima</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/main.css}" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-	<form th:action="@{/clima}" th:object="${climaDTO}" method="post">
-		<h1>
-			<th th:text="#{clima.listado}"></th>
-		</h1>
-		
-		<table class="resultados" border="1" style="align-self: center;">
-			<thead>
-				<tr>
-					<th><label th:text="#{clima.ciudad}"/></th>
-					<th><label th:text="#{clima.estado}"/></th>
-					<th><label th:text="#{clima.temp}"/></th>
-					<th><label th:text="#{clima.porcentaje.humedad}"/></th>
-					<th>Editar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="clima : ${resultados}">
-					<td th:text=${{clima.ciudad.nombre}}></td>
-					<td th:text=${{clima.estado.estado}}></td>
-					<td th:text=${{clima.temperatura}}></td>
-					<td th:text=${{clima.porcentajeHumedad}}></td>
-					<td>
-						<a th:href="@{/climaEditar/{id}(id=${clima.id})}">
-	                        editar
-	                    </a>
-                    </td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<h2>
-			<th th:text="#{clima.registrar}"></th>
-		</h2>
-		
-		<table border="0" style="align-self: center;">
-			<!-- Selector de ciudad -->
-			<tr>
-	            <td>
-	            	<label th:text="#{clima.ciudad}" />
-            	</td>
-	            <td>
-			        <select th:field="*{idCiudad}">
-					  <option th:each="ciudad : ${allCiudades}" 
-					          th:value="${ciudad.id}" 
-					          th:text="${ciudad.nombre}"></option>
-					</select>
-				</td>
-				<td><p th:each="error : ${#fields.errors('global')}" th:text="${error}" style="color: red;"/></td>
-				 
-			</tr> 
-			<!-- Estado -->
-			<tr>
-				<td><label th:text="#{clima.estado}" /></td>
-				<td>
-			        <select th:field="*{idEstado}">
-					  <option th:each="estado : ${allEstados}" 
-					          th:value="${estado.id}" 
-					          th:text="${estado.estado}"></option>
-					</select>
-				</td>
-				<td><p th:if="${#fields.hasErrors('idEstado')}" th:errorclass="error" th:errors="*{idEstado}" style="color: red;"/></td>
-			</tr>
-			<!-- Temperatura -->
-			<tr>
-				<td><label th:text="#{clima.temp}" /></td>
-				<td><input type="number" th:field="*{temperatura}" /></td>
-				<td><p th:if="${#fields.hasErrors('temperatura')}" th:errorclass="error" th:errors="*{temperatura}" style="color: red;"/></td> 
-			</tr>
-			<!-- Porcentaje de humedad -->
-			<tr>
-				<td><label th:text="#{clima.porcentaje.humedad}" /></td>
-				<td><input type="number" th:field="*{porcentajeHumedad}" /></td>
-				<td><p th:if="${#fields.hasErrors('porcentajeHumedad')}" th:errorclass="error" th:errors="*{porcentajeHumedad}" style="color: red;"/></td>
-			</tr>
-		</table>
-		
-		<!-- Botones -->
-		<table class="botones">
-			<tr>
-				<td><input type="submit" name="action" value="Registrar"/></td>
-				<td><input type="submit" name="action" value="Cancelar" /></td>
-<!--				<td><input type="submit" name="action" value="Actualizar" /></td>
--->			</tr>
-		</table>
-		
-	</form>
+	<div class="container">
+		<form th:action="@{/clima}" th:object="${climaDTO}" method="post">
+			<!-- Listado -->
+			<div class="row">
+				<!-- Título Listado -->
+				<div class="col-12">
+					<h1 class="text-center">
+						<th th:text="#{clima.listado}"></th>
+					</h1>
+				</div>
+				
+				<!-- Tabla Listado -->
+				<div class="col-12">
+					<table class="resultados table table-bordered" border="1" style="align-self: center;">
+						<thead>
+							<tr class="text-center">
+								<th><label th:text="#{clima.ciudad}"/></th>
+								<th><label th:text="#{clima.estado}"/></th>
+								<th><label th:text="#{clima.temp}"/></th>
+								<th><label th:text="#{clima.porcentaje.humedad}"/></th>
+								<th>Editar</th>
+							</tr>
+						</thead>
+						<tbody class="text-center">
+							<tr th:each="clima : ${resultados}">
+								<td th:text=${{clima.ciudad.nombre}}></td>
+								<td th:text=${{clima.estado.estado}}></td>
+								<td th:text=${{clima.temperatura}}></td>
+								<td th:text=${{clima.porcentajeHumedad}}></td>
+								<td>
+									<a class="d-block col-12 btn btn-warning" th:href="@{/climaEditar/{id}(id=${clima.id})}">
+				                        editar
+				                    </a>
+			                    </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- Fin Tabla Listado-->
+			</div>
+			<!-- Fin Listado -->
+			<!-- Registrar -->
+			<div class="row">
+				<!-- Título Registrar -->
+				<div class="col-12">
+					<h2>
+						<th th:text="#{clima.registrar}"></th>
+					</h2>
+				</div>
+				<!-- Registrar Clima -->
+				<div class="col-12">
+					<table class="table" border="0" style="align-self: center;">
+						<!-- Selector de ciudad -->
+						<tr class="form-group">
+				            <td style="width: 30%">
+				            	<label th:text="#{clima.ciudad}" />
+			            	</td>
+				            <td>
+						        <select class="form-control" th:field="*{idCiudad}">
+								  <option th:each="ciudad : ${allCiudades}" 
+								          th:value="${ciudad.id}" 
+								          th:text="${ciudad.nombre}"></option>
+								</select>
+							</td>
+							<td><p th:each="error : ${#fields.errors('global')}" th:text="${error}" style="color: red;"/></td>
+							 
+						</tr> 
+						<!-- Estado -->
+						<tr class="form-group">
+							<td>
+								<label th:text="#{clima.estado}" />
+							</td>
+							<td>
+						        <select class="form-control" th:field="*{idEstado}">
+								  <option th:each="estado : ${allEstados}" 
+								          th:value="${estado.id}" 
+								          th:text="${estado.estado}"></option>
+								</select>
+							</td>
+							<td><p th:if="${#fields.hasErrors('idEstado')}" th:errorclass="error" th:errors="*{idEstado}" style="color: red;"/></td>
+						</tr>
+						<!-- Temperatura -->
+						<tr class="form-group">
+							<td><label th:text="#{clima.temp}" /></td>
+							<td><input class="form-control" type="number" th:field="*{temperatura}" /></td>
+							<td><p th:if="${#fields.hasErrors('temperatura')}" th:errorclass="error" th:errors="*{temperatura}" style="color: red;"/></td> 
+						</tr>
+						<!-- Porcentaje de humedad -->
+						<tr class="form-group">
+							<td><label th:text="#{clima.porcentaje.humedad}" /></td>
+							<td><input class="form-control" type="number" th:field="*{porcentajeHumedad}" /></td>
+							<td><p th:if="${#fields.hasErrors('porcentajeHumedad')}" th:errorclass="error" th:errors="*{porcentajeHumedad}" style="color: red;"/></td>
+						</tr>
+					</table>
+				</div>
+				
+				<!-- Botones -->
+				<table class="col-12 botones mt-3">
+					<tr class="form-group">
+						<td><input class="d-block col-12 btn btn-success" type="submit" name="action" value="Registrar"/></td>
+						<td><input class="d-block col-12 btn btn-danger" type="submit" name="action" value="Cancelar" /></td>
+					</tr>
+				</table>				
+				<!-- Fin Registrar Clima -->
+			</div>
+			<!-- Fin Registrar -->
+			
+		</form>
+	</div>
 	
 	
 </body>
